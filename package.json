@@ -2,10 +2,10 @@
   "name": "nodejs-complete",
   "version": "1.0.0",
   "description": "",
-  "main": "NODEJS-Complete.js",
+  "main": "11_Building RESTful CRUD APIs with Express.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
