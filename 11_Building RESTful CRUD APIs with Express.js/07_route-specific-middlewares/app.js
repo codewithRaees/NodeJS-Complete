@@ -3,22 +3,14 @@ import express from "express";
 const app = express();
 const port = 4000;
 
-// app.use("/", (req, res , next) => {
-//   console.log(req.headers)
-//  console.log("Hiiii")
-//  res.send("Middle Ware Running")
-// })
+app.use("/users/1", (req, res, next) => {
+  res.send("2nd middleware");
+});
 
-app.get("/", (req, res) => {
+app.use("/users", (req, res, next) => {
   console.log(req.url)
-  console.log(req.headers)
-  res.send("Home is running")
-})
-app.get("/login", (req, res) => {
-  console.log(req.url)
-  console.log(req.headers)
-  res.send("Login is running")
-})
+  res.send("First middleware");
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
