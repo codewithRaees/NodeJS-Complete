@@ -20,6 +20,7 @@ function App() {
     const file = e.target.files[0];
     const xhr = new XMLHttpRequest();
     xhr.open("POST", `${URL}${file.name}`, true);
+
     xhr.addEventListener("load", () => {
       console.log(xhr.response);
       getDirectoryItems();
@@ -34,6 +35,7 @@ function App() {
   async function handleDelete(filename) {
     const response = await fetch(`${URL}${filename}`, {
       method: "DELETE",
+     
     });
     const data = await response.text();
     console.log(data);
