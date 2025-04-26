@@ -15,7 +15,7 @@ app.use((req, res, next) => {
 })
 
 app.post('/:filename', (req, res) => {
-  const writeStream = createWriteStream(`./storage/${req.params.filename}`);
+  const writeStream = createWriteStream(`./public/${req.params.filename}`);
   req.pipe(writeStream)
   req.on('end', () => {
     res.end('File uploaded on the server')
@@ -23,7 +23,7 @@ app.post('/:filename', (req, res) => {
 })
 //READ
 app.get('/', async (req, res) => {
- const filesList = await readdir('./storage')
+ const filesList = await readdir('./public')
  res.json(filesList)
 })
 app.get('/:filename', (req, res) => {
@@ -31,14 +31,14 @@ app.get('/:filename', (req, res) => {
   if (req.query.action === 'download') {
     res.set('Content-Disposition', 'attachment')
   }
-  res.sendFile(`${import.meta.dirname}/storage/${filename}`)
+  res.sendFile(`${import.meta.dirname}/public/${filename}`)
 })
 
 
 // Delete
 app.delete('/:filename', async (req, res) => {
   const { filename } = req.params
-  const filePath = `./storage/${filename}`
+  const filePath = `./public/${filename}`
   console.log(filePath)
   try {
     rm(filePath)
@@ -53,8 +53,8 @@ app.delete('/:filename', async (req, res) => {
 app.patch('/:filename', async (req, res) => {
   const { filename } = req.params
   const newFilename = req.body.newFilename
-  const filePath = `./storage/${filename}`
-  const newFilePath = `./storage/${newFilename}`
+  const filePath = `./public/${filename}`
+  const newFilePath = `./public/${newFilename}`
   try {
     await rename(filePath, newFilePath)
     res.json({ message: 'Renamed Successfully' })
@@ -66,7 +66,7 @@ app.patch('/:filename', async (req, res) => {
 // // Update
 // app.patch("/:filename", async (req, res) => {
 //   const { filename } = req.params;
-//   await rename(`./storage/${filename}`, `./storage/${req.body.newFilename}`);
+//   await rename(`./public/${filename}`, `./public/${req.body.newFilename}`);
 //   res.json({ message: "Renamed" });
 // });
 
